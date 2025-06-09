@@ -1,4 +1,3 @@
-import Sidebar from '@/components/admin/Sidebar';
 import DashboardCard from '@/components/admin/DashboardCard';
 import { Users, MessageSquare, Clock, Star, Calendar, TrendingUp } from 'lucide-react';
 
@@ -17,11 +16,8 @@ const MentorDashboard = () => {
   ];
 
   return (
-    <div className="flex w-full">
-      <Sidebar />
-      
-      <div className="flex-1 p-8">
-        <div className="mb-8">
+    <div className="w-full p-8">
+      <div className="mb-8">
           <h1 className="text-3xl font-bold text-text-dark mb-2">Welcome back, Dr. Sarah Chen</h1>
           <p className="text-text-subtle">Here's what's happening with your mentees today.</p>
         </div>
@@ -134,7 +130,6 @@ const MentorDashboard = () => {
             </div>
           </div>
         </div>
-      </div>
     </div>
   );
 };

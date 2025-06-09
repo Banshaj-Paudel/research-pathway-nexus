@@ -1,6 +1,6 @@
-import Sidebar from '@/components/admin/Sidebar';
 import DashboardCard from '@/components/admin/DashboardCard';
-import { GraduationCap, Users, FileText, TrendingUp, Eye, CheckCircle } from 'lucide-react';
+import UniversitySidebar from '@/components/admin/UniversitySidebar';
+import { GraduationCap, Users, FileText, TrendingUp, CheckCircle, Eye } from 'lucide-react';
 
 const UniversityDashboard = () => {
   const recentSubmissions = [
@@ -46,10 +46,9 @@ const UniversityDashboard = () => {
   ];
 
   return (
-    <div className="flex w-full">
-      <Sidebar />
-      
-      <div className="flex-1 p-8">
+    <div className="flex w-full min-h-screen">
+      <UniversitySidebar />
+      <main className="flex-1 p-8 overflow-auto">
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-text-dark mb-2">Stanford University Portal</h1>
           <p className="text-text-subtle">Manage your scholarship programs and track applications.</p>
@@ -173,7 +172,7 @@ const UniversityDashboard = () => {
             </button>
           </div>
         </div>
-      </div>
+      </main>
     </div>
   );
 };
