@@ -1,13 +1,51 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+// Import visitor pages
+import HomePage from "../app/(visitor)/page";
+import ScholarshipsPage from "../app/(visitor)/scholarships/page";
+import MentorsPage from "../app/(visitor)/mentors/page";
+
+// Import admin pages  
+import MentorDashboard from "../app/(admin)/admin/mentor/dashboard/page";
+import UniversityDashboard from "../app/(admin)/admin/university/dashboard/page";
+
+// Import layouts
+import VisitorLayout from "../app/(visitor)/layout";
+import AdminLayout from "../app/(admin)/layout";
 
 const Index = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
-      </div>
-    </div>
+    <Routes>
+      {/* Visitor Routes */}
+      <Route path="/" element={
+        <VisitorLayout>
+          <HomePage />
+        </VisitorLayout>
+      } />
+      <Route path="/scholarships" element={
+        <VisitorLayout>
+          <ScholarshipsPage />
+        </VisitorLayout>
+      } />
+      <Route path="/mentors" element={
+        <VisitorLayout>
+          <MentorsPage />
+        </VisitorLayout>
+      } />
+      
+      {/* Admin Routes */}
+      <Route path="/admin/mentor/dashboard" element={
+        <AdminLayout>
+          <MentorDashboard />
+        </AdminLayout>
+      } />
+      <Route path="/admin/university/dashboard" element={
+        <AdminLayout>
+          <UniversityDashboard />
+        </AdminLayout>
+      } />
+    </Routes>
   );
 };
 
