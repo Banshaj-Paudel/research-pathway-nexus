@@ -17,6 +17,10 @@ import AdminLoginPage from "./app/(visitor)/admin/page";
 
 // Import admin pages  
 import MentorDashboard from "./app/(admin)/admin/mentor/dashboard/page";
+import MenteesPage from "./app/(admin)/admin/mentor/mentees/page";
+import ResourcesPage from "./app/(admin)/admin/mentor/resources/page";
+import AchievementsPage from "./app/(admin)/admin/mentor/achievements/page";
+import SettingsPage from "./app/(admin)/admin/mentor/settings/page";
 import UniversityDashboard from "./app/(admin)/admin/university/dashboard/page";
 
 // Import layouts
@@ -73,6 +77,26 @@ const App = () => (
           <Route path="/admin/mentor/dashboard" element={
             <AdminLayout>
               <MentorDashboard />
+            </AdminLayout>
+          } />
+          <Route path="/admin/mentor/mentees" element={
+            <AdminLayout>
+              <MenteesPage />
+            </AdminLayout>
+          } />
+          <Route path="/admin/mentor/resources" element={
+            <AdminLayout>
+              <ResourcesPage />
+            </AdminLayout>
+          } />
+          <Route path="/admin/mentor/achievements" element={
+            <AdminLayout>
+              <AchievementsPage />
+            </AdminLayout>
+          } />
+          <Route path="/admin/mentor/settings" element={
+            <AdminLayout>
+              <SettingsPage />
             </AdminLayout>
           } />
           <Route path="/admin/university/dashboard" element={
