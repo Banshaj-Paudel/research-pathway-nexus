@@ -1,5 +1,4 @@
 import DashboardCard from '@/components/admin/DashboardCard';
-import UniversitySidebar from '@/components/admin/UniversitySidebar';
 import { GraduationCap, Users, FileText, TrendingUp, CheckCircle, Eye } from 'lucide-react';
 
 const UniversityDashboard = () => {
@@ -46,9 +45,8 @@ const UniversityDashboard = () => {
   ];
 
   return (
-    <div className="flex w-full min-h-screen">
-      <UniversitySidebar />
-      <main className="flex-1 p-8 overflow-auto">
+    <div className="w-full">
+      <main className="p-6">
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-text-dark mb-2">Stanford University Portal</h1>
           <p className="text-text-subtle">Manage your scholarship programs and track applications.</p>

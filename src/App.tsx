@@ -3,7 +3,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import NotFound from "./pages/NotFound";
 
 // Import visitor pages
@@ -20,8 +20,15 @@ import MentorDashboard from "./app/(admin)/admin/mentor/dashboard/page";
 import MenteesPage from "./app/(admin)/admin/mentor/mentees/page";
 import ResourcesPage from "./app/(admin)/admin/mentor/resources/page";
 import AchievementsPage from "./app/(admin)/admin/mentor/achievements/page";
-import SettingsPage from "./app/(admin)/admin/mentor/settings/page";
+import MentorSettingsPage from "./app/(admin)/admin/mentor/settings/page";
+
+// Import university pages
 import UniversityDashboard from "./app/(admin)/admin/university/dashboard/page";
+import UniversityApplicationsPage from "./app/(admin)/admin/university/applications/page";
+import UniversityScholarshipsPage from "./app/(admin)/admin/university/scholarships/page";
+import UniversityStudentsPage from "./app/(admin)/admin/university/students/page";
+import UniversityReportsPage from "./app/(admin)/admin/university/reports/page";
+import UniversitySettingsPage from "./app/(admin)/admin/university/settings/page";
 
 // Import layouts
 import VisitorLayout from "./app/(visitor)/layout";
@@ -73,7 +80,10 @@ const App = () => (
             </VisitorLayout>
           } />
           
-          {/* Admin Routes */}
+          {/* Admin Mentor Routes */}
+          <Route path="/admin/mentor" element={
+            <Navigate to="/admin/mentor/dashboard" replace />
+          } />
           <Route path="/admin/mentor/dashboard" element={
             <AdminLayout>
               <MentorDashboard />
@@ -96,12 +106,69 @@ const App = () => (
           } />
           <Route path="/admin/mentor/settings" element={
             <AdminLayout>
-              <SettingsPage />
+              <MentorSettingsPage />
             </AdminLayout>
           } />
-          <Route path="/admin/university/dashboard" element={
+
+          {/* Admin University Routes */}
+          <Route path="/admin/university">
+            <Route index element={
+              <Navigate to="dashboard" replace />
+            } />
+            <Route path="dashboard" element={
+              <AdminLayout>
+                <UniversityDashboard />
+              </AdminLayout>
+            } />
+            <Route path="applications" element={
+              <AdminLayout>
+                <UniversityApplicationsPage />
+              </AdminLayout>
+            } />
+            <Route path="scholarships" element={
+              <AdminLayout>
+                <UniversityScholarshipsPage />
+              </AdminLayout>
+            } />
+            <Route path="students" element={
+              <AdminLayout>
+                <UniversityStudentsPage />
+              </AdminLayout>
+            } />
+            <Route path="reports" element={
+              <AdminLayout>
+                <UniversityReportsPage />
+              </AdminLayout>
+            } />
+            <Route path="settings" element={
+              <AdminLayout>
+                <UniversitySettingsPage />
+              </AdminLayout>
+            } />
+          </Route>
+          <Route path="/admin/university/applications" element={
             <AdminLayout>
-              <UniversityDashboard />
+              <UniversityApplicationsPage />
+            </AdminLayout>
+          } />
+          <Route path="/admin/university/scholarships" element={
+            <AdminLayout>
+              <UniversityScholarshipsPage />
+            </AdminLayout>
+          } />
+          <Route path="/admin/university/students" element={
+            <AdminLayout>
+              <UniversityStudentsPage />
+            </AdminLayout>
+          } />
+          <Route path="/admin/university/reports" element={
+            <AdminLayout>
+              <UniversityReportsPage />
+            </AdminLayout>
+          } />
+          <Route path="/admin/university/settings" element={
+            <AdminLayout>
+              <UniversitySettingsPage />
             </AdminLayout>
           } />
           

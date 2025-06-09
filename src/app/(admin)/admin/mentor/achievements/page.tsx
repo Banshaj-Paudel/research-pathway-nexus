@@ -145,8 +145,8 @@ const AchievementsPage = () => {
   });
 
   return (
-    <div className="w-full p-8">
-      <div className="mb-8">
+    <div className="w-full max-w-full pl-0 pr-2 py-2">
+      <div className="mb-6 text-left">
         <h1 className="text-3xl font-bold text-gray-900 mb-2">Achievements & Progress</h1>
         <p className="text-gray-600">Track your mentoring milestones and accomplishments</p>
       </div>
@@ -167,11 +167,11 @@ const AchievementsPage = () => {
       </div>
 
       {/* Filter */}
-      <div className="mb-6">
+      <div className="mb-8 flex justify-center">
         <select
           value={selectedTimeRange}
           onChange={(e) => setSelectedTimeRange(e.target.value)}
-          className="px-4 py-2 rounded-lg border border-gray-200 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          className="px-4 py-2 rounded-lg border border-gray-200 focus:ring-2 focus:ring-blue-500 focus:border-transparent text-center"
         >
           <option value="all">All Time</option>
           <option value="year">This Year</option>
@@ -180,7 +180,7 @@ const AchievementsPage = () => {
         </select>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 w-full">
         {/* Earned Achievements */}
         <div>
           <h2 className="text-2xl font-semibold text-gray-900 mb-6">Earned Achievements</h2>

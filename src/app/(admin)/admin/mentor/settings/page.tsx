@@ -56,7 +56,11 @@ const SettingsPage = () => {
   };
 
   const renderProfileTab = () => (
-    <div className="space-y-6">
+    <div className="w-full p-8">
+      <div className="mb-8">
+        <h1 className="text-3xl font-bold text-gray-900 mb-2">Settings</h1>
+        <p className="text-gray-600">Manage your account and preferences</p>
+      </div>
       <div className="flex items-center space-x-6">
         <div className="relative">
           <div className="w-24 h-24 bg-gradient-to-br from-primary to-brand rounded-full flex items-center justify-center text-white text-2xl font-bold">
@@ -269,25 +273,42 @@ const SettingsPage = () => {
   );
 
   return (
-    <div className="max-w-4xl mx-auto p-6">
-      <div className="flex space-x-6 border-b border-border-light mb-6">
-        {tabs.map((tab) => (
-          <button
-            key={tab.id}
-            onClick={() => setActiveTab(tab.id)}
-            className={`flex items-center space-x-2 px-4 py-2 font-medium text-sm rounded-t-md ${activeTab === tab.id ? 'text-primary border-b-2 border-primary' : 'text-text-subtle'}`}
-          >
-            {tab.icon}
-            <span>{tab.label}</span>
-          </button>
-        ))}
+    <div className="w-full p-8">
+      <div className="mb-8">
+        <h1 className="text-3xl font-bold text-gray-900 mb-2">Settings</h1>
+        <p className="text-gray-600">Manage your account preferences and security settings</p>
       </div>
 
-      <div>
-        {activeTab === 'profile' && renderProfileTab()}
-        {activeTab === 'notifications' && renderNotificationsTab()}
-        {activeTab === 'privacy' && renderPrivacyTab()}
-        {/* Add additional tab renders as needed */}
+      <div className="bg-white rounded-xl shadow-sm overflow-hidden">
+        <div className="lg:grid lg:grid-cols-12">
+          {/* Sidebar */}
+          <div className="lg:col-span-3 border-r border-gray-100">
+            <nav className="p-4 space-y-1">
+              {tabs.map((tab) => (
+                <button
+                  key={tab.id}
+                  onClick={() => setActiveTab(tab.id)}
+                  className={`group flex items-center w-full px-3 py-3 text-sm font-medium rounded-lg ${
+                    activeTab === tab.id
+                      ? 'bg-blue-50 text-blue-700'
+                      : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
+                  }`}
+                >
+                  <span className="mr-3">{tab.icon}</span>
+                  {tab.label}
+                </button>
+              ))}
+            </nav>
+          </div>
+
+          {/* Main Content */}
+          <div className="lg:col-span-9 p-8">
+            {activeTab === 'profile' && renderProfileTab()}
+            {activeTab === 'notifications' && renderNotificationsTab()}
+            {activeTab === 'privacy' && renderPrivacyTab()}
+            {/* Add additional tab renders as needed */}
+          </div>
+        </div>
       </div>
     </div>
   );

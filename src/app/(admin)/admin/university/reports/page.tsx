@@ -1,0 +1,192 @@
+'use client';
+
+import { useState } from 'react';
+import { BarChart2, LineChart, PieChart, Download, Calendar, Search, FileText, Users, Award, DollarSign } from 'lucide-react';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+
+type TimeRange = '7days' | '30days' | '90days' | '12months' | 'custom';
+
+interface MetricCardProps {
+  title: string;
+  value: string;
+  change: string;
+  icon: React.ComponentType<{ className?: string }>;
+}
+
+interface ChartCardProps {
+  title: string;
+  description: string;
+  icon: React.ComponentType<{ className?: string }>;
+}
+
+const MetricCard = ({ title, value, change, icon: Icon }: MetricCardProps) => (
+  <Card>
+    <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+      <CardTitle className="text-sm font-medium">{title}</CardTitle>
+      <Icon className="h-4 w-4 text-muted-foreground" />
+    </CardHeader>
+    <CardContent>
+      <div className="text-2xl font-bold">{value}</div>
+      <p className="text-xs text-muted-foreground">{change}</p>
+    </CardContent>
+  </Card>
+);
+
+const ChartCard = ({ title, description, icon: Icon }: ChartCardProps) => (
+  <Card>
+    <CardHeader>
+      <div className="flex items-center gap-2">
+        <Icon className="h-5 w-5 text-muted-foreground" />
+        <CardTitle className="text-lg">{title}</CardTitle>
+      </div>
+      <CardDescription>{description}</CardDescription>
+    </CardHeader>
+    <CardContent className="h-[300px] flex items-center justify-center bg-muted/50 rounded-md">
+      <div className="text-muted-foreground text-center">
+        <Icon className="mx-auto h-12 w-12 mb-2" />
+        <p>{title} chart will be displayed here</p>
+      </div>
+    </CardContent>
+  </Card>
+);
+
+export default function ReportsPage() {
+  const [timeRange, setTimeRange] = useState<TimeRange>('30days');
+  const [searchQuery, setSearchQuery] = useState('');
+  const [activeTab, setActiveTab] = useState('overview');
+
+  return (
+    <div className="space-y-6 p-6">
+      <div className="space-y-1">
+        <h2 className="text-2xl font-bold tracking-tight">University Reports</h2>
+        <p className="text-muted-foreground">Analytics and insights for university administration</p>
+      </div>
+
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+        <div className="w-full sm:w-64">
+          <div className="relative">
+            <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
+            <Input
+              placeholder="Search reports..."
+              className="w-full pl-8"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+          </div>
+        </div>
+        <div className="flex items-center gap-2 w-full sm:w-auto">
+          <Select value={timeRange} onValueChange={(value) => setTimeRange(value as TimeRange)}>
+            <SelectTrigger className="w-full sm:w-[180px]">
+              <Calendar className="mr-2 h-4 w-4" />
+              <SelectValue placeholder="Select time range" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="7days">Last 7 days</SelectItem>
+              <SelectItem value="30days">Last 30 days</SelectItem>
+              <SelectItem value="90days">Last 90 days</SelectItem>
+              <SelectItem value="12months">Last 12 months</SelectItem>
+              <SelectItem value="custom">Custom range</SelectItem>
+            </SelectContent>
+          </Select>
+          <Button variant="outline" size="sm" className="whitespace-nowrap">
+            <Download className="mr-2 h-4 w-4" />
+            Export
+          </Button>
+        </div>
+      </div>
+
+      <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-4">
+        <TabsList>
+          <TabsTrigger value="overview">Overview</TabsTrigger>
+          <TabsTrigger value="applications">Applications</TabsTrigger>
+          <TabsTrigger value="enrollment">Enrollment</TabsTrigger>
+          <TabsTrigger value="financial">Financial</TabsTrigger>
+        </TabsList>
+
+        <TabsContent value="overview" className="space-y-4">
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+            <MetricCard
+              title="Total Applications"
+              value="1,234"
+              change="+12% from last month"
+              icon={FileText}
+            />
+            <MetricCard
+              title="Active Students"
+              value="8,567"
+              change="+5% from last month"
+              icon={Users}
+            />
+            <MetricCard
+              title="Scholarships Awarded"
+              value="234"
+              change="+18% from last month"
+              icon={Award}
+            />
+            <MetricCard
+              title="Total Funding"
+              value="$5.2M"
+              change="+8% from last month"
+              icon={DollarSign}
+            />
+          </div>
+
+          <div className="grid gap-4 lg:grid-cols-3">
+            <Card className="lg:col-span-2">
+              <CardHeader>
+                <CardTitle>Applications Overview</CardTitle>
+                <CardDescription>Monthly application trends for the past year</CardDescription>
+              </CardHeader>
+              <CardContent className="h-[300px]">
+                <div className="h-full flex items-center justify-center text-muted-foreground">
+                  <BarChart2 className="h-8 w-8 mr-2" />
+                  <p>Application chart will be displayed here</p>
+                </div>
+              </CardContent>
+            </Card>
+            <Card>
+              <CardHeader>
+                <CardTitle>Admission Status</CardTitle>
+                <CardDescription>Distribution of application statuses</CardDescription>
+              </CardHeader>
+              <CardContent className="h-[300px]">
+                <div className="h-full flex items-center justify-center">
+                  <PieChart className="h-8 w-8 mr-2" />
+                  <p>Admission status chart will be displayed here</p>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </TabsContent>
+
+        <TabsContent value="applications" className="space-y-4">
+          <ChartCard
+            title="Application Analytics"
+            description="Detailed application metrics and trends"
+            icon={LineChart}
+          />
+        </TabsContent>
+
+        <TabsContent value="enrollment" className="space-y-4">
+          <ChartCard
+            title="Enrollment Statistics"
+            description="Student enrollment trends and demographics"
+            icon={Users}
+          />
+        </TabsContent>
+
+        <TabsContent value="financial" className="space-y-4">
+          <ChartCard
+            title="Financial Reports"
+            description="Scholarship funding and financial aid distribution"
+            icon={DollarSign}
+          />
+        </TabsContent>
+      </Tabs>
+    </div>
+  );
+}
