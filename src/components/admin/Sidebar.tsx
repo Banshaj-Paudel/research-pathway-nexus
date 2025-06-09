@@ -1,95 +1,110 @@
 
-'use client';
-
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { 
-  Home, 
+  LayoutDashboard, 
   Users, 
-  FileText, 
+  BookOpen, 
+  Award, 
   Settings, 
-  BarChart, 
-  Calendar,
-  Briefcase,
-  GraduationCap,
-  MessageSquare
+  LogOut,
+  ChevronLeft,
+  ChevronRight 
 } from 'lucide-react';
 
-interface SidebarProps {
-  role: 'university' | 'mentor' | 'job' | 'admin';
-}
+const Sidebar = () => {
+  const [isCollapsed, setIsCollapsed] = useState(false);
+  const location = useLocation();
 
-const Sidebar = ({ role }: SidebarProps) => {
-  const pathname = usePathname();
-
-  const getMenuItems = () => {
-    switch (role) {
-      case 'university':
-        return [
-          { href: '/admin/university/dashboard', label: 'Dashboard', icon: Home },
-          { href: '/admin/university/scholarships', label: 'Scholarships', icon: GraduationCap },
-          { href: '/admin/university/submissions', label: 'Submissions', icon: FileText },
-          { href: '/admin/university/analytics', label: 'Analytics', icon: BarChart },
-          { href: '/admin/university/settings', label: 'Settings', icon: Settings },
-        ];
-      case 'mentor':
-        return [
-          { href: '/admin/mentor/dashboard', label: 'Dashboard', icon: Home },
-          { href: '/admin/mentor/mentees', label: 'Mentees', icon: Users },
-          { href: '/admin/mentor/messages', label: 'Messages', icon: MessageSquare },
-          { href: '/admin/mentor/schedule', label: 'Schedule', icon: Calendar },
-          { href: '/admin/mentor/profile', label: 'Profile', icon: Settings },
-        ];
-      case 'job':
-        return [
-          { href: '/admin/job/dashboard', label: 'Dashboard', icon: Home },
-          { href: '/admin/job/listings', label: 'Job Listings', icon: Briefcase },
-          { href: '/admin/job/applicants', label: 'Applicants', icon: Users },
-          { href: '/admin/job/analytics', label: 'Analytics', icon: BarChart },
-          { href: '/admin/job/settings', label: 'Settings', icon: Settings },
-        ];
-      default:
-        return [
-          { href: '/admin/dashboard', label: 'Dashboard', icon: Home },
-          { href: '/admin/opportunities', label: 'Opportunities', icon: FileText },
-          { href: '/admin/users', label: 'Users', icon: Users },
-          { href: '/admin/analytics', label: 'Analytics', icon: BarChart },
-          { href: '/admin/settings', label: 'Settings', icon: Settings },
-        ];
-    }
-  };
-
-  const menuItems = getMenuItems();
+  const menuItems = [
+    { 
+      icon: LayoutDashboard, 
+      label: 'Dashboard', 
+      path: '/admin/mentor/dashboard',
+      active: location.pathname === '/admin/mentor/dashboard'
+    },
+    { 
+      icon: Users, 
+      label: 'Mentees', 
+      path: '/admin/mentor/mentees',
+      active: location.pathname === '/admin/mentor/mentees'
+    },
+    { 
+      icon: BookOpen, 
+      label: 'Resources', 
+      path: '/admin/mentor/resources',
+      active: location.pathname === '/admin/mentor/resources'
+    },
+    { 
+      icon: Award, 
+      label: 'Achievements', 
+      path: '/admin/mentor/achievements',
+      active: location.pathname === '/admin/mentor/achievements'
+    },
+    { 
+      icon: Settings, 
+      label: 'Settings', 
+      path: '/admin/mentor/settings',
+      active: location.pathname === '/admin/mentor/settings'
+    },
+  ];
 
   return (
-    <div className="w-64 bg-white shadow-lg h-screen sticky top-0">
-      <div className="p-6 border-b border-border-light">
-        <Link href="/" className="text-xl font-bold text-primary">
-          Research Shock
-        </Link>
-        <p className="text-text-subtle text-sm mt-1 capitalize">{role} Dashboard</p>
+    <div className={`bg-white border-r border-gray-200 transition-all duration-300 ${
+      isCollapsed ? 'w-16' : 'w-64'
+    }`}>
+      <div className="p-4 border-b border-gray-200">
+        <div className="flex items-center justify-between">
+          {!isCollapsed && (
+            <h2 className="text-lg font-semibold text-text-dark">Mentor Portal</h2>
+          )}
+          <button
+            onClick={() => setIsCollapsed(!isCollapsed)}
+            className="p-1.5 rounded-lg hover:bg-gray-100"
+          >
+            {isCollapsed ? (
+              <ChevronRight className="h-4 w-4" />
+            ) : (
+              <ChevronLeft className="h-4 w-4" />
+            )}
+          </button>
+        </div>
       </div>
       
-      <nav className="mt-6">
-        {menuItems.map((item) => {
-          const Icon = item.icon;
-          const isActive = pathname === item.href;
-          
-          return (
-            <Link 
-              key={item.href}
-              href={item.href}
-              className={`flex items-center px-6 py-3 text-sm transition-colors ${
-                isActive 
-                  ? 'bg-primary/10 text-primary border-r-2 border-primary' 
-                  : 'text-text-subtle hover:text-text-dark hover:bg-gray-50'
-              }`}
-            >
-              <Icon className="h-5 w-5 mr-3" />
-              {item.label}
-            </Link>
-          );
-        })}
+      <nav className="p-4">
+        <ul className="space-y-2">
+          {menuItems.map((item) => {
+            const Icon = item.icon;
+            return (
+              <li key={item.path}>
+                <Link
+                  to={item.path}
+                  className={`flex items-center px-3 py-2 rounded-lg transition-colors ${
+                    item.active
+                      ? 'bg-primary text-white'
+                      : 'text-text-subtle hover:bg-gray-100 hover:text-text-dark'
+                  }`}
+                >
+                  <Icon className="h-5 w-5" />
+                  {!isCollapsed && (
+                    <span className="ml-3">{item.label}</span>
+                  )}
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
+        
+        <div className="mt-auto pt-8">
+          <button className={`flex items-center px-3 py-2 text-red-600 hover:bg-red-50 rounded-lg w-full transition-colors ${
+            isCollapsed ? 'justify-center' : ''
+          }`}>
+            <LogOut className="h-5 w-5" />
+            {!isCollapsed && (
+              <span className="ml-3">Logout</span>
+            )}
+          </button>
+        </div>
       </nav>
     </div>
   );

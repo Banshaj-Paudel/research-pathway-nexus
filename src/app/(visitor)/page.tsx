@@ -1,6 +1,6 @@
 
-import Link from 'next/link';
 import { Search, Users, GraduationCap, Briefcase, BookOpen, Star } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import OpportunityCard from '@/components/ui/OpportunityCard';
 
 const HomePage = () => {
@@ -152,7 +152,7 @@ const HomePage = () => {
           </div>
 
           <div className="text-center mt-12">
-            <Link href="/opportunities" className="btn-primary">
+            <Link to="/opportunities" className="btn-primary">
               View All Opportunities
             </Link>
           </div>
@@ -167,10 +167,10 @@ const HomePage = () => {
             Join thousands of students who have found their dream opportunities through Research Shock.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/opportunities" className="bg-white text-primary px-8 py-4 rounded-xl font-medium hover:bg-gray-100 transition-colors">
+            <Link to="/opportunities" className="bg-white text-primary px-8 py-4 rounded-xl font-medium hover:bg-gray-100 transition-colors">
               Browse Opportunities
             </Link>
-            <Link href="/admin" className="border-2 border-white text-white px-8 py-4 rounded-xl font-medium hover:bg-white hover:text-primary transition-colors">
+            <Link to="/admin" className="border-2 border-white text-white px-8 py-4 rounded-xl font-medium hover:bg-white hover:text-primary transition-colors">
               Partner With Us
             </Link>
           </div>

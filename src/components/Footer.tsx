@@ -1,5 +1,5 @@
 
-import Link from 'next/link';
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
   return (
@@ -16,28 +16,28 @@ const Footer = () => {
           <div>
             <h4 className="font-semibold mb-4">Opportunities</h4>
             <ul className="space-y-2">
-              <li><Link href="/scholarships" className="text-blue-200 hover:text-white">Scholarships</Link></li>
-              <li><Link href="/jobs" className="text-blue-200 hover:text-white">Jobs</Link></li>
-              <li><Link href="/research" className="text-blue-200 hover:text-white">Research Projects</Link></li>
-              <li><Link href="/mentors" className="text-blue-200 hover:text-white">Mentors</Link></li>
+              <li><Link to="/scholarships" className="text-blue-200 hover:text-white">Scholarships</Link></li>
+              <li><Link to="/jobs" className="text-blue-200 hover:text-white">Jobs</Link></li>
+              <li><Link to="/research" className="text-blue-200 hover:text-white">Research Projects</Link></li>
+              <li><Link to="/mentors" className="text-blue-200 hover:text-white">Mentors</Link></li>
             </ul>
           </div>
           
           <div>
             <h4 className="font-semibold mb-4">For Institutions</h4>
             <ul className="space-y-2">
-              <li><Link href="/admin/university" className="text-blue-200 hover:text-white">University Portal</Link></li>
-              <li><Link href="/admin/job" className="text-blue-200 hover:text-white">Post Jobs</Link></li>
-              <li><Link href="/admin/mentor" className="text-blue-200 hover:text-white">Mentor Dashboard</Link></li>
+              <li><Link to="/admin/university" className="text-blue-200 hover:text-white">University Portal</Link></li>
+              <li><Link to="/admin/job" className="text-blue-200 hover:text-white">Post Jobs</Link></li>
+              <li><Link to="/admin/mentor" className="text-blue-200 hover:text-white">Mentor Dashboard</Link></li>
             </ul>
           </div>
           
           <div>
             <h4 className="font-semibold mb-4">Support</h4>
             <ul className="space-y-2">
-              <li><Link href="/about" className="text-blue-200 hover:text-white">About Us</Link></li>
-              <li><Link href="/contact" className="text-blue-200 hover:text-white">Contact</Link></li>
-              <li><Link href="/help" className="text-blue-200 hover:text-white">Help Center</Link></li>
+              <li><Link to="/about" className="text-blue-200 hover:text-white">About Us</Link></li>
+              <li><Link to="/contact" className="text-blue-200 hover:text-white">Contact</Link></li>
+              <li><Link to="/help" className="text-blue-200 hover:text-white">Help Center</Link></li>
             </ul>
           </div>
         </div>
