@@ -10,6 +10,10 @@ import NotFound from "./pages/NotFound";
 import HomePage from "./app/(visitor)/page";
 import ScholarshipsPage from "./app/(visitor)/scholarships/page";
 import MentorsPage from "./app/(visitor)/mentors/page";
+import JobsPage from "./app/(visitor)/jobs/page";
+import ResearchPage from "./app/(visitor)/research/page";
+import OpportunitiesPage from "./app/(visitor)/opportunities/page";
+import AdminLoginPage from "./app/(visitor)/admin/page";
 
 // Import admin pages  
 import MentorDashboard from "./app/(admin)/admin/mentor/dashboard/page";
@@ -42,6 +46,26 @@ const App = () => (
           <Route path="/mentors" element={
             <VisitorLayout>
               <MentorsPage />
+            </VisitorLayout>
+          } />
+          <Route path="/jobs" element={
+            <VisitorLayout>
+              <JobsPage />
+            </VisitorLayout>
+          } />
+          <Route path="/research" element={
+            <VisitorLayout>
+              <ResearchPage />
+            </VisitorLayout>
+          } />
+          <Route path="/opportunities" element={
+            <VisitorLayout>
+              <OpportunitiesPage />
+            </VisitorLayout>
+          } />
+          <Route path="/admin" element={
+            <VisitorLayout>
+              <AdminLoginPage />
             </VisitorLayout>
           } />
           
