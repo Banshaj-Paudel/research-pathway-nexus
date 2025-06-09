@@ -1,4 +1,3 @@
-
 import Sidebar from '@/components/admin/Sidebar';
 import DashboardCard from '@/components/admin/DashboardCard';
 import { GraduationCap, Users, FileText, TrendingUp, Eye, CheckCircle } from 'lucide-react';
@@ -48,7 +47,7 @@ const UniversityDashboard = () => {
 
   return (
     <div className="flex w-full">
-      <Sidebar role="university" />
+      <Sidebar />
       
       <div className="flex-1 p-8">
         <div className="mb-8">
